@@ -518,6 +518,7 @@ static void createSensorsCallback(
         checkGroupEvent(directory.string(), groupEventPathList);
 
         PowerState readState = getPowerState(*baseConfig);
+        size_t readSlot = getSlotId(*baseConfig);
 
         /* Check if there are more sensors in the same interface */
         int i = 1;
@@ -970,7 +971,8 @@ static void createSensorsCallback(
                     readState, findSensorUnit->second, factor,
                     psuProperty.maxReading, psuProperty.minReading,
                     psuProperty.sensorOffset, labelHead, thresholdConfSize,
-                    pollRate, i2cDev);
+                    pollRate, i2cDev, readSlot);
+
                 sensors[sensorName]->setupRead();
                 ++numCreated;
                 if constexpr (debug)
@@ -1149,7 +1151,11 @@ static void powerStateChanged(
         {
             if (sensor != nullptr && sensor->readState == type)
             {
-                sensor->deactivate();
+                if ((type == PowerState::chassisOn) &&
+                    (!isChassisOn(sensor->slotId)))
+                {
+                    sensor->deactivate();
+                }
             }
         }
     }
