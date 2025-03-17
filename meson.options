@@ -89,3 +89,9 @@ option(
     value: false,
     description: 'Disable host power monitoring for hwmon-temp.',
 )
+option(
+    'disable-in2-alarm-event',
+    type: 'boolean',
+    value: 'false',
+    description: 'Disable in2_alarm event.',
+)

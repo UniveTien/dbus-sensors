@@ -1171,7 +1171,9 @@ void propertyInitialize()
                        {"Failure", {"crit_alarm", "lcrit_alarm"}}};
 
     eventMatch = {{"PredictiveFailure", {"power1_alarm"}},
+#ifndef DISABLE_IN2_ALARM_EVENT
                   {"Failure", {"in2_alarm"}},
+#endif
                   {"ACLost", {"in1_beep"}},
                   {"ConfigureError", {"in1_fault"}}};
 

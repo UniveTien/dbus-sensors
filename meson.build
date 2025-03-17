@@ -31,6 +31,10 @@ add_project_arguments(
     language: 'cpp',
 )
 
+if get_option('disable-in2-alarm-event')
+    add_project_arguments('-DDISABLE_IN2_ALARM_EVENT', language : 'cpp')
+endif
+
 threads = dependency('threads')
 # i2c-tools doesn't ship a pkg-config file for libi2c
 i2c = meson.get_compiler('cpp').find_library('i2c')
