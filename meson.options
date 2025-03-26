@@ -95,3 +95,10 @@ option(
     value: 'false',
     description: 'Disable in2_alarm event.',
 )
+
+option(
+    'fan_sensor_retry_attempts',
+    type: 'integer',
+    value: 0,
+    description: 'Number of retry attempts for fan sensor operations',
+)
